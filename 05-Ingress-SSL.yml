@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ssl-a
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"  # Disable redirect for HTTP
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: eapp5.cloudworld.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app5-nginx-a-clusterip-service
+                port:
+                  number: 80
+    - host: eapp6.cloudworld.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app6-nginx-a-clusterip-service
+                port:
+                  number: 80
+
+  tls:
+    - hosts:
+        - eapp5.cloudworld.uk
+      secretName: eapp5-cloudworld-secret
+    - hosts:
+        - eapp6.cloudworld.uk
+      secretName: eapp6-cloudworld-secret
