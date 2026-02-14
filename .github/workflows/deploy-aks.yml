@@ -22,8 +22,8 @@ jobs:
       - name: Set AKS context
         uses: azure/aks-set-context@v3
         with:
-          resource-group: rg-aks-clus
-          cluster-name: aks-clu
+          resource-group: aks-rg-dev
+          cluster-name: aks-dev-cluster
 
       - name: Deploy manifests
         run: |
