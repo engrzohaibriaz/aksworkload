@@ -28,8 +28,8 @@ jobs:
       - name: Set AKS context
         uses: azure/aks-set-context@v3
         with:
-          resource-group: aks-rg-dev
-          cluster-name: aks-dev-cluster
+          resource-group: rg-github
+          cluster-name: aks-dev
 
       - name: Deploy manifests
         run: kubectl apply -f .
